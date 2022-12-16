@@ -13,7 +13,7 @@ export default function Switch() {
       )}
     >
       <span
-        className={classNames('h-5 w-5 bg-white rounded-full', {
+        className={classNames('h-5 w-5 bg-white rounded-full ', {
           'ml-5': isSelected,
         })}
       />
