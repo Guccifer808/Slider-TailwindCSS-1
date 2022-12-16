@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 import { BsDot } from 'react-icons/bs';
+import { ImSwitch } from 'react-icons/im';
+import { useEffect } from 'react';
+import Switch from './Switch';
+
 function App() {
   const slidesUrl = [
     {
@@ -20,8 +24,21 @@ function App() {
     },
   ];
 
-  //state
+  //state for Slider
   const [index, setIndex] = useState(0);
+  //state, useEffect and handler for Dark Mode
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+  const themeSwitchHandler = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
   //buttons
   const prevSlide = () => {
     const isFirstSlide = index === 0;
@@ -37,45 +54,57 @@ function App() {
   const toSlide = (slideIndex) => {
     setIndex(slideIndex);
   };
-  //dark mode
 
   //
   return (
-    <div className='max-w-[1500px] h-[780px] w-full m-auto py-16 px-4 relative group'>
-      <div className='flex justify-center'>
-        <h1 className='mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl darks:text-white '>
-          Tailwind CSS Slider
-        </h1>
-      </div>
-      <div
-        className='w-full h-full rounded-2xl bg-center bg-cover duration-500'
-        style={{ backgroundImage: `url(${slidesUrl[index].url})` }}
-      >
-        {/* Arrows */}
-        <div
-          onClick={prevSlide}
-          className='hidden group-hover:block absolute top-[50%] left-5 -translate-x-0 -translate-y-[50%] text-2xl text-white cursor-pointer bg-black/30 rounded-full'
-        >
-          <VscChevronLeft size={50} />
-        </div>
-        <div
-          onClick={nextSlide}
-          className='hidden group-hover:block absolute top-[50%] right-5 -translate-x-0 -translate-y-[50%] text-2xl text-white cursor-pointer bg-black/30 rounded-full'
-        >
-          <VscChevronRight size={50} />
-        </div>
-      </div>
-      {/* Dots */}
-      <div className='flex top-2 justify-center py-2'>
-        {slidesUrl.map((slide, slideIndex) => (
-          <div
-            onClick={() => toSlide(slideIndex)}
-            key={slideIndex}
-            className='text-xl cursor-pointer'
-          >
-            <BsDot />
+    <div className='dark:bg-gray-900 bg-white h-screen w-screen transition-colors duration-500'>
+      <div className='max-w-[1500px] h-[800px] w-full m-auto py-16 px-4 relative group '>
+        <div className='flex justify-center '>
+          <h1 className='mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white '>
+            Tailwind CSS Slider
+          </h1>
+          <div className='absolute right-1 justify-center items-center dark:bg-gray-900 bg-white rounded-full darkswitch'>
+            {/* <button
+              className='dark:bg-white flex bg-gray-900 text-white dark:text-gray-900 shadow dark:shadow-yellow-500 shadow-indigo-500/40 p-4 rounded-3xl darkswitch'
+              onClick={themeSwitchHandler}
+            >
+              <ImSwitch />
+            </button> */}
+            <div className='' onClick={themeSwitchHandler}>
+              <Switch />
+            </div>
           </div>
-        ))}
+        </div>
+        <div
+          className='w-full h-full rounded-2xl bg-center bg-cover duration-500 '
+          style={{ backgroundImage: `url(${slidesUrl[index].url})` }}
+        >
+          {/* Arrows */}
+          <div
+            onClick={prevSlide}
+            className='hidden group-hover:block absolute top-[50%] left-5 -translate-x-0 -translate-y-[50%] text-2xl text-white cursor-pointer bg-black/30 rounded-full '
+          >
+            <VscChevronLeft size={50} />
+          </div>
+          <div
+            onClick={nextSlide}
+            className='hidden group-hover:block absolute top-[50%] right-5 -translate-x-0 -translate-y-[50%] text-2xl text-white cursor-pointer bg-black/30 rounded-full '
+          >
+            <VscChevronRight size={50} />
+          </div>
+        </div>
+        {/* Dots */}
+        <div className='flex top-2 justify-center py-2'>
+          {slidesUrl.map((slide, slideIndex) => (
+            <div
+              onClick={() => toSlide(slideIndex)}
+              key={slideIndex}
+              className='text-xl cursor-pointer dark:text-white text-gray-900 '
+            >
+              <BsDot />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
