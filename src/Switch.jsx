@@ -6,15 +6,15 @@ export default function Switch() {
     <div
       onClick={() => setSelected(!isSelected)}
       className={classNames(
-        'flex w-10 h-5 bg-gray-900 m-5 rounded-full cursor-pointer',
+        'flex w-10 h-3 md:h-5 bg-gray-900 m-5 rounded-full cursor-pointer',
         {
           'bg-yellow-400': isSelected,
         }
       )}
     >
       <span
-        className={classNames('h-5 w-5 bg-white rounded-full ', {
-          'ml-5': isSelected,
+        className={classNames('md:h-5 md:w-5 h-3 w-3 bg-white rounded-full ', {
+          'ml-7': isSelected,
         })}
       />
     </div>

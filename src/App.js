@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 import { BsDot } from 'react-icons/bs';
-import { ImSwitch } from 'react-icons/im';
 import { useEffect } from 'react';
 import Switch from './Switch';
 
@@ -56,6 +55,8 @@ function App() {
   };
 
   //
+  const sliderStyles =
+    'hidden group-hover:block absolute top-[60%] -translate-x-0 -translate-y-[50%] text-2xl text-white cursor-pointer bg-black/30 rounded-full transition ease-in-out delay-500';
   return (
     <div className='dark:bg-gray-900 bg-white h-screen w-screen transition-colors duration-500'>
       <div className='max-w-[1500px] h-[800px] w-full m-auto py-16 px-4 relative group '>
@@ -63,7 +64,7 @@ function App() {
           <h1 className='mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white '>
             Tailwind CSS Slider
           </h1>
-          <div className='absolute right-1 justify-center items-center dark:bg-gray-900 bg-white rounded-full darkswitch'>
+          <div className='absolute right-1 top-2 justify-center items-center dark:bg-gray-900 bg-white rounded-full darkswitch'>
             {/* <button
               className='dark:bg-white flex bg-gray-900 text-white dark:text-gray-900 shadow dark:shadow-yellow-500 shadow-indigo-500/40 p-4 rounded-3xl darkswitch'
               onClick={themeSwitchHandler}
@@ -82,15 +83,17 @@ function App() {
           {/* Arrows */}
           <div
             onClick={prevSlide}
-            className='hidden group-hover:block absolute top-[50%] left-5 -translate-x-0 -translate-y-[50%] text-2xl text-white cursor-pointer bg-black/30 rounded-full '
+            // className='hidden group-hover:block absolute top-[60%] left-5 -translate-x-0 -translate-y-[50%] text-2xl text-white cursor-pointer bg-black/30 rounded-full transition ease-in-out delay-150'
+            className={`right-5 + ${sliderStyles}`}
           >
-            <VscChevronLeft size={50} />
+            <VscChevronRight size={50} />
           </div>
           <div
             onClick={nextSlide}
-            className='hidden group-hover:block absolute top-[50%] right-5 -translate-x-0 -translate-y-[50%] text-2xl text-white cursor-pointer bg-black/30 rounded-full '
+            // className='hidden group-hover:block absolute top-[60%] right-5 -translate-x-0 -translate-y-[50%] text-2xl text-white cursor-pointer bg-black/30 rounded-full transition ease-in-out delay-150'
+            className={`left-5 ${sliderStyles}`}
           >
-            <VscChevronRight size={50} />
+            <VscChevronLeft size={50} />
           </div>
         </div>
         {/* Dots */}
